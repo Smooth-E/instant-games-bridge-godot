@@ -33,6 +33,7 @@ func purchase(purchase_id, callback = null):
 		.then(_js_purchase_then) \
 		.catch(_js_purchase_catch)
 
+
 func consume_purchase(purchase_token, callback = null):
 	if _consume_purchase_callback != null:
 		return
@@ -46,6 +47,7 @@ func consume_purchase(purchase_token, callback = null):
 		.then(_js_consume_purchase_then) \
 		.catch(_js_consume_purchase_catch)
 
+
 func get_catalog(callback = null):
 	if _get_catalog_callback != null:
 		return
@@ -55,6 +57,7 @@ func get_catalog(callback = null):
 	_js_payments.getCatalog() \
 		.then(_js_get_catalog_then) \
 		.catch(_js_get_catalog_catch)
+
 
 func get_purchases(callback = null):
 	if _get_purchases_callback != null:
@@ -70,25 +73,30 @@ func get_purchases(callback = null):
 func _init(js_payments):
 	_js_payments = js_payments
 
+
 func _on_js_purchase_then(args):
 	if _purchase_callback != null:
 		_purchase_callback.call_func(true)
 		_purchase_callback = null
+
 
 func _on_js_purchase_catch(args):
 	if _purchase_callback != null:
 		_purchase_callback.call_func(false)
 		_purchase_callback = null
 
+
 func _on_js_consume_purchase_then(args):
 	if _consume_purchase_callback != null:
 		_consume_purchase_callback.call_func(true)
 		_consume_purchase_callback = null
 
+
 func _on_js_consume_purchase_catch(args):
 	if _consume_purchase_callback != null:
 		_consume_purchase_callback.call_func(false)
 		_consume_purchase_callback = null
+
 
 func _on_js_get_catalog_then(args):
 	if _get_catalog_callback != null:
@@ -115,10 +123,12 @@ func _on_js_get_catalog_then(args):
 				_get_catalog_callback.call_func(false, [])
 		_get_catalog_callback = null
 
+
 func _on_js_get_catalog_catch(args):
 	if _js_get_catalog_catch != null:
 		_js_get_catalog_catch.call_func(false, [])
 		_js_get_catalog_catch = null
+
 
 func _on_js_get_purchases_then(args):
 	if _get_purchases_callback != null:
@@ -139,6 +149,7 @@ func _on_js_get_purchases_then(args):
 			_:
 				_get_purchases_callback.call_func(false, [])
 		_get_purchases_callback = null
+
 
 func _on_js_get_purchases_catch(args):
 	if _js_get_catalog_catch != null:

@@ -9,20 +9,26 @@ var is_get_entries_supported : get = _is_get_entries_supported_getter
 func _is_supported_getter():
 	return _js_leaderboard.isSupported
 
+
 func _is_native_popup_supported_getter():
 	return _js_leaderboard.isNativePopupSupported
+
 
 func _is_multiple_boards_supported_getter():
 	return _js_leaderboard.isMultipleBoardsSupported
 
+
 func _is_set_score_supported_getter():
 	return _js_leaderboard.isSetScoreSupported
+
 
 func _is_get_score_supported_getter():
 	return _js_leaderboard.isGetScoreSupported
 
+
 func _is_get_entries_supported_getter():
 	return _js_leaderboard.isGetEntriesSupported
+
 
 var _js_leaderboard = null
 var _set_score_callback = null
@@ -59,6 +65,7 @@ func set_score(options, callback = null):
 		.then(_js_set_score_then) \
 		.catch(_js_set_score_catch)
 
+
 func get_score(options, callback = null):
 	if _get_score_callback != null:
 		return
@@ -77,6 +84,7 @@ func get_score(options, callback = null):
 	_js_leaderboard.getScore(js_options) \
 		.then(_js_get_score_then) \
 		.catch(_js_get_score_catch)
+
 
 func get_entries(options, callback = null):
 	if _get_entries_callback != null:
@@ -99,6 +107,7 @@ func get_entries(options, callback = null):
 	_js_leaderboard.getEntries(js_options) \
 		.then(_js_get_entries_then) \
 		.catch(_js_get_entries_catch)
+
 
 func show_native_popup(options, callback = null):
 	if _show_native_popup_callback != null:
@@ -124,25 +133,30 @@ func show_native_popup(options, callback = null):
 func _init(js_leaderboard):
 	_js_leaderboard = js_leaderboard
 
+
 func _on_js_set_score_then(args):
 	if _set_score_callback != null:
 		_set_score_callback.call_func(true)
 		_set_score_callback = null
+
 
 func _on_js_set_score_catch(args):
 	if _set_score_callback != null:
 		_set_score_callback.call_func(false)
 		_set_score_callback = null
 
+
 func _on_js_get_score_then(args):
 	if _get_score_callback != null:
 		_get_score_callback.call_func(true, args[0])
 		_get_score_callback = null
 
+
 func _on_js_get_score_catch(args):
 	if _get_score_callback != null:
 		_get_score_callback.call_func(false, 0)
 		_get_score_callback = null
+
 
 func _on_js_get_entries_then(args):
 	if _get_entries_callback != null:
@@ -170,15 +184,18 @@ func _on_js_get_entries_then(args):
 				_get_entries_callback.call_func(false, [])
 		_get_entries_callback = null
 
+
 func _on_js_get_entries_catch(args):
 	if _get_entries_callback != null:
 		_get_entries_callback.call_func(false, [])
 		_get_entries_callback = null
 
+
 func _on_js_show_native_popup_then(args):
 	if _show_native_popup_callback != null:
 		_show_native_popup_callback.call_func(true)
 		_show_native_popup_callback = null
+
 
 func _on_js_show_native_popup_catch(args):
 	if _show_native_popup_callback != null:

@@ -11,27 +11,35 @@ var is_rate_supported : get = _is_rate_supported_getter
 func _is_share_supported_getter():
 	return _js_social.isShareSupported
 
+
 func _is_join_community_supported_getter():
 	return _js_social.isJoinCommunitySupported
+
 
 func _is_invite_friends_supported_getter():
 	return _js_social.isInviteFriendsSupported
 
+
 func _is_create_post_supported_getter():
 	return _js_social.isCreatePostSupported
+
 
 func _is_add_to_favorites_supported_getter():
 	return _js_social.isAddToFavoritesSupported
 
+
 func _is_add_to_home_screen_supported_getter():
 	return _js_social.isAddToHomeScreenSupported
+
 
 func _is_external_links_allowed_getter():
 	return _js_social.isExternalLinksAllowed
 
+
 func _is_rate_supported_getter():
 	return _js_social.isRateSupported
-	
+
+
 var _js_social = null
 var _share_callback = null
 var _js_share_then = JavaScriptBridge.create_callback(_on_js_share_then)
@@ -75,6 +83,7 @@ func share(options, callback = null):
 		.then(_js_share_then) \
 		.catch(_js_share_catch)
 
+
 func join_community(options, callback = null):
 	if _join_community_callback != null:
 		return
@@ -94,6 +103,7 @@ func join_community(options, callback = null):
 		.then(_js_join_community_then) \
 		.catch(_js_join_community_catch)
 
+
 func invite_friends(callback = null):
 	if _invite_friends_callback != null:
 		return
@@ -102,6 +112,7 @@ func invite_friends(callback = null):
 	_js_social.inviteFriends() \
 		.then(_js_invite_friends_then) \
 		.catch(_js_invite_friends_catch)
+
 
 func create_post(options, callback = null):
 	if _create_post_callback != null:
@@ -123,6 +134,7 @@ func create_post(options, callback = null):
 		.then(_js_create_post_then) \
 		.catch(_js_create_post_catch)
 
+
 func add_to_favorites(callback = null):
 	if _add_to_favorites_callback != null:
 		return
@@ -132,6 +144,7 @@ func add_to_favorites(callback = null):
 		.then(_js_add_to_favorites_then) \
 		.catch(_js_add_to_favorites_catch)
 
+
 func add_to_home_screen(callback = null):
 	if _add_to_home_screen_callback != null:
 		return
@@ -140,6 +153,7 @@ func add_to_home_screen(callback = null):
 	_js_social.addToHomeScreen() \
 		.then(_js_add_to_home_screen_then) \
 		.catch(_js_add_to_home_screen_catch)
+
 
 func rate(callback = null):
 	if _rate_callback != null:
@@ -154,70 +168,84 @@ func rate(callback = null):
 func _init(js_social):
 	_js_social = js_social
 
+
 func _on_js_share_then(args):
 	if _share_callback != null:
 		_share_callback.call_func(true)
 		_share_callback = null
+
 
 func _on_js_share_catch(args):
 	if _share_callback != null:
 		_share_callback.call_func(false)
 		_share_callback = null
 
+
 func _on_js_join_community_then(args):
 	if _join_community_callback != null:
 		_join_community_callback.call_func(true)
 		_join_community_callback = null
+
 
 func _on_js_join_community_catch(args):
 	if _join_community_callback != null:
 		_join_community_callback.call_func(false)
 		_join_community_callback = null
 
+
 func _on_js_invite_friends_then(args):
 	if _invite_friends_callback != null:
 		_invite_friends_callback.call_func(true)
 		_invite_friends_callback = null
+
 
 func _on_js_invite_friends_catch(args):
 	if _invite_friends_callback != null:
 		_invite_friends_callback.call_func(false)
 		_invite_friends_callback = null
 
+
 func _on_js_create_post_then(args):
 	if _create_post_callback != null:
 		_create_post_callback.call_func(true)
 		_create_post_callback = null
+
 
 func _on_js_create_post_catch(args):
 	if _create_post_callback != null:
 		_create_post_callback.call_func(false)
 		_create_post_callback = null
 
+
 func _on_js_add_to_favorites_then(args):
 	if _add_to_favorites_callback != null:
 		_add_to_favorites_callback.call_func(true)
 		_add_to_favorites_callback = null
+
 
 func _on_js_add_to_favorites_catch(args):
 	if _add_to_favorites_callback != null:
 		_add_to_favorites_callback.call_func(false)
 		_add_to_favorites_callback = null
 
+
 func _on_js_add_to_home_screen_then(args):
 	if _add_to_home_screen_callback != null:
 		_add_to_home_screen_callback.call_func(true)
 		_add_to_home_screen_callback = null
+
 
 func _on_js_add_to_home_screen_catch(args):
 	if _add_to_home_screen_callback != null:
 		_add_to_home_screen_callback.call_func(false)
 		_add_to_home_screen_callback = null
 
+
 func _on_js_rate_then(args):
 	if _rate_callback != null:
 		_rate_callback.call_func(true)
 		_rate_callback = null
+
 
 func _on_js_rate_catch(args):
 	if _rate_callback != null:

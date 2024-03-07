@@ -4,20 +4,26 @@ var id : get = _id_getter
 var name : get = _name_getter
 var photos : get = _photos_getter
 
+
 func _is_authorization_supported_getter():
 	return false
-	
+
+
 func _is_authorized_getter():
 	return false
-	
+
+
 func _id_getter():
 	return null
+
 
 func _name_getter():
 	return null
 
+
 func _photos_getter():
 	return []
+
 
 func authorize(callback = null):
 	if callback != null:

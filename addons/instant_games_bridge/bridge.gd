@@ -65,15 +65,18 @@ class ShowBannerOptions:
 	func _init(container_id):
 		self.container_id = container_id
 
+
 class ShareVkOptions:
 	var link
 	func _init(link):
 		self.link = link
 
+
 class JoinCommunityVkOptions:
 	var group_id
 	func _init(group_id):
 		self.group_id = group_id
+
 
 class CreatePostVkOptions:
 	var message
@@ -82,6 +85,7 @@ class CreatePostVkOptions:
 		self.message = message
 		self.attachments = attachments
 
+
 class SetScoreYandexOptions:
 	var score
 	var leaderboard_name
@@ -89,10 +93,12 @@ class SetScoreYandexOptions:
 		self.score = score
 		self.leaderboard_name = leaderboard_name
 
+
 class GetScoreYandexOptions:
 	var leaderboard_name
 	func _init(leaderboard_name):
 		self.leaderboard_name = leaderboard_name
+
 
 class GetEntriesYandexOptions:
 	var leaderboard_name
@@ -105,12 +111,14 @@ class GetEntriesYandexOptions:
 		self.quantity_around = quantity_around
 		self.quantity_top = quantity_top
 
+
 class ShowNativePopupVkOptions:
 	var user_result
 	var global
 	func _init(user_result, global):
 		self.user_result = user_result
 		self.global = global
+
 
 class RemoteConfigGetYandexOptions:
 	var client_features
@@ -133,32 +141,41 @@ var remote_config : get = _remote_config_getter
 func _platform_getter():
 	return _platform
 
+
 func _device_getter():
 	return _device
+
 
 func _player_getter():
 	return _player
 
+
 func _game_getter():
 	return _game
+
 
 func _storage_getter():
 	return _storage
 
+
 func _advertisement_getter():
 	return _advertisement
+
 
 func _social_getter():
 	return _social
 
+
 func _leaderboard_getter():
 	return _leaderboard
+
 
 func _payments_getter():
 	return _payments
 
 func _remote_config_getter():
 	return _remote_config
+
 
 var _platform = null
 var _device = null

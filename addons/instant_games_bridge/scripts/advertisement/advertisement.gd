@@ -33,6 +33,7 @@ var _js_on_rewarded_state_changed = JavaScriptBridge.create_callback(_on_rewarde
 func set_minimum_delay_between_interstitial(value):
 	_js_advertisement.setMinimumDelayBetweenInterstitial(value)
 
+
 func show_banner(options = null):
 	var js_options = JavaScriptBridge.create_object("Object")
 	js_options.containerId = "banner-container"
@@ -42,11 +43,14 @@ func show_banner(options = null):
 
 	_js_advertisement.showBanner(js_options)
 
+
 func hide_banner():
 	_js_advertisement.hideBanner()
 
+
 func show_interstitial(ignore_delay = false):
 	_js_advertisement.showInterstitial(ignore_delay)
+
 
 func show_rewarded():
 	_js_advertisement.showRewarded()
@@ -58,11 +62,14 @@ func _init(js_advertisement):
 	_js_advertisement.on('interstitial_state_changed', _js_on_interstitial_state_changed)
 	_js_advertisement.on('rewarded_state_changed', _js_on_rewarded_state_changed)
 
+
 func _on_banner_state_changed(args):
 	emit_signal("banner_state_changed", args[0])
 
+
 func _on_interstitial_state_changed(args):
 	emit_signal("interstitial_state_changed", args[0])
+
 
 func _on_rewarded_state_changed(args):
 	emit_signal("rewarded_state_changed", args[0])

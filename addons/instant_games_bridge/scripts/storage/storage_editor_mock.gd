@@ -2,6 +2,7 @@ var default_type : get =_default_type_getter
 
 const _FILE_EXTENSION = ".save"
 
+
 func _default_type_getter():
 	return Bridge.StorageType.LOCAL_STORAGE
 
@@ -13,12 +14,14 @@ func is_supported(storage_type):
 		_:
 			return false
 
+
 func is_available(storage_type):
 	match storage_type:
 		Bridge.StorageType.LOCAL_STORAGE:
 			return true
 		_:
 			return false
+
 
 func get(key, callback = null, storage_type = null):
 	if callback == null:
@@ -48,6 +51,7 @@ func get(key, callback = null, storage_type = null):
 	
 	callback.call_func(success, data)
 
+
 func set(key, value, callback = null, storage_type = null):
 	if storage_type != null and not is_supported(storage_type):
 		callback.call_func(false)
@@ -69,6 +73,7 @@ func set(key, value, callback = null, storage_type = null):
 	
 	if callback != null:
 		callback.call_func(success)
+
 
 func delete(key, callback = null, storage_type = null):
 	if storage_type != null and not is_supported(storage_type):
@@ -96,6 +101,7 @@ func delete(key, callback = null, storage_type = null):
 func _get_file_path(key):
 	return "user://" + key + _FILE_EXTENSION
 
+
 func _get(key):
 	var path = _get_file_path(key)
 	
@@ -112,6 +118,7 @@ func _get(key):
 	else:
 		return data
 
+
 func _set(key, value):
 	var path = _get_file_path(key)
 	
@@ -122,6 +129,7 @@ func _set(key, value):
 	
 	file.store_string(value)
 	file = null
+
 
 func _delete(key):
 	var path = _get_file_path(key)

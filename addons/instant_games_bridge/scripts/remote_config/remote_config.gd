@@ -4,6 +4,7 @@ var is_supported : get = _is_supported_getter
 func _is_supported_getter():
 	return false
 
+
 var _js_remote_config = null
 var _is_getting = false
 var _get_callback = null
@@ -42,6 +43,7 @@ func get(options = null, callback = null):
 func _init(js_remote_config):
 	_js_remote_config = js_remote_config
 
+
 func _on_js_get_then(args):
 	_is_getting = false
 	if _get_callback == null:
@@ -58,6 +60,7 @@ func _on_js_get_then(args):
 			_get_callback.call_func(true, values)
 		_:
 			_get_callback.call_func(true, data)
+
 
 func _on_js_get_catch(args):
 	_is_getting = false
