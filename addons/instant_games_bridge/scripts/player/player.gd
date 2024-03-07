@@ -31,11 +31,11 @@ func _photos_getter():
 var _js_player = null
 var _js_authorize_then = JavaScriptBridge.create_callback(_on_js_authorize_then)
 var _js_authorize_catch = JavaScriptBridge.create_callback(_on_js_authorize_catch)
-var _authorize_callback = null
+var _authorize_callback: Callable = Callable()
 
 
-func authorize(callback):
-	if _authorize_callback != null:
+func authorize(callback: Callable):
+	if not _authorize_callback.is_null():
 		return
 	
 	_authorize_callback = callback
@@ -49,12 +49,12 @@ func _init(js_player):
 
 
 func _on_js_authorize_then(args):
-	if _authorize_callback != null:
-		_authorize_callback.call_func(true)
-		_authorize_callback = null
+	if not _authorize_callback.is_null():
+		_authorize_callback.call(true)
+		_authorize_callback = Callable()
 
 
 func _on_js_authorize_catch(args):
-	if _authorize_callback != null:
-		_authorize_callback.call_func(false)
-		_authorize_callback = null
+	if not _authorize_callback.is_null():
+		_authorize_callback.call(false)
+		_authorize_callback = Callable()

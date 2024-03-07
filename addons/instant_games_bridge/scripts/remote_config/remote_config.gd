@@ -6,17 +6,17 @@ func _is_supported_getter():
 
 
 var _js_remote_config = null
-var _is_getting = false
-var _get_callback = null
+var _is_getting: bool = false
+var _get_callback: Callable = Callable()
 var _js_get_then = JavaScriptBridge.create_callback(_on_js_get_then)
 var _js_get_catch = JavaScriptBridge.create_callback(_on_js_get_catch)
 
 
-func get(options = null, callback = null):
+func get(options = null, callback: Callable = Callable()):
 	if _is_getting:
 		return
 	
-	if callback == null:
+	if callback.is_null():
 		return
 	
 	var js_options = JavaScriptBridge.create_object("Object")
@@ -46,7 +46,7 @@ func _init(js_remote_config):
 
 func _on_js_get_then(args):
 	_is_getting = false
-	if _get_callback == null:
+	if _get_callback.is_null():
 		return
 	
 	var data = args[0]
@@ -57,12 +57,12 @@ func _on_js_get_then(args):
 			var keys = JavaScriptBridge.get_interface("Object").keys(data)
 			for i in range(keys.length):
 				values[keys[i]] = data[keys[i]]
-			_get_callback.call_func(true, values)
+			_get_callback.call(true, values)
 		_:
-			_get_callback.call_func(true, data)
+			_get_callback.call(true, data)
 
 
 func _on_js_get_catch(args):
 	_is_getting = false
-	if _get_callback != null:
-		_get_callback.call_func(false, null)
+	if not _get_callback.is_null():
+		_get_callback.call(false, null)

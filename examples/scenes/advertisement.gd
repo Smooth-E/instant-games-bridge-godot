@@ -19,9 +19,9 @@ func _ready():
 	_on_interstitial_state_changed(Bridge.advertisement.interstitial_state)
 	_on_rewarded_state_changed(Bridge.advertisement.rewarded_state)
 	
-	Bridge.advertisement.connect("banner_state_changed", self, "_on_banner_state_changed")
-	Bridge.advertisement.connect("interstitial_state_changed", self, "_on_interstitial_state_changed")
-	Bridge.advertisement.connect("rewarded_state_changed", self, "_on_rewarded_state_changed")
+	Bridge.advertisement.banner_state_changed.connect(_on_banner_state_changed)
+	Bridge.advertisement.interstitial_state_changed.connect(_on_interstitial_state_changed)
+	Bridge.advertisement.rewarded_state_changed.connect(_on_rewarded_state_changed)
 
 
 func _on_show_banner_button_pressed():

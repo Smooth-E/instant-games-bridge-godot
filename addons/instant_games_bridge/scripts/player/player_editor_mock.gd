@@ -25,6 +25,6 @@ func _photos_getter():
 	return []
 
 
-func authorize(callback = null):
-	if callback != null:
-		callback.call_func(false)
+func authorize(callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)

@@ -6,22 +6,22 @@ func _is_supported_getter():
 
 
 var _js_payments = null
-var _purchase_callback = null
+var _purchase_callback: Callable = Callable()
 var _js_purchase_then = JavaScriptBridge.create_callback(_on_js_purchase_then)
 var _js_purchase_catch = JavaScriptBridge.create_callback(_on_js_purchase_catch)
-var _consume_purchase_callback = null
+var _consume_purchase_callback: Callable = Callable()
 var _js_consume_purchase_then = JavaScriptBridge.create_callback(_on_js_consume_purchase_then)
 var _js_consume_purchase_catch = JavaScriptBridge.create_callback(_on_js_consume_purchase_catch)
-var _get_catalog_callback = null
+var _get_catalog_callback: Callable = Callable()
 var _js_get_catalog_then = JavaScriptBridge.create_callback(_on_js_get_catalog_then)
 var _js_get_catalog_catch = JavaScriptBridge.create_callback(_on_js_get_catalog_catch)
-var _get_purchases_callback = null
+var _get_purchases_callback: Callable = Callable()
 var _js_get_purchases_then = JavaScriptBridge.create_callback(_on_js_get_purchases_then)
 var _js_get_purchases_catch = JavaScriptBridge.create_callback(_on_js_get_purchases_catch)
 
 
-func purchase(purchase_id, callback = null):
-	if _purchase_callback != null:
+func purchase(purchase_id, callback: Callable = Callable()):
+	if not _purchase_callback.is_null():
 		return
 	
 	_purchase_callback = callback
@@ -34,8 +34,8 @@ func purchase(purchase_id, callback = null):
 		.catch(_js_purchase_catch)
 
 
-func consume_purchase(purchase_token, callback = null):
-	if _consume_purchase_callback != null:
+func consume_purchase(purchase_token, callback: Callable = Callable()):
+	if not _consume_purchase_callback.is_null():
 		return
 
 	_consume_purchase_callback = callback
@@ -48,8 +48,8 @@ func consume_purchase(purchase_token, callback = null):
 		.catch(_js_consume_purchase_catch)
 
 
-func get_catalog(callback = null):
-	if _get_catalog_callback != null:
+func get_catalog(callback: Callable = Callable()):
+	if not _get_catalog_callback.is_null():
 		return
 
 	_get_catalog_callback = callback
@@ -59,8 +59,8 @@ func get_catalog(callback = null):
 		.catch(_js_get_catalog_catch)
 
 
-func get_purchases(callback = null):
-	if _get_purchases_callback != null:
+func get_purchases(callback: Callable = Callable()):
+	if not _get_purchases_callback.is_null():
 		return
 
 	_get_purchases_callback = callback
@@ -75,31 +75,31 @@ func _init(js_payments):
 
 
 func _on_js_purchase_then(args):
-	if _purchase_callback != null:
-		_purchase_callback.call_func(true)
-		_purchase_callback = null
+	if not _purchase_callback.is_null():
+		_purchase_callback.call(true)
+		_purchase_callback = Callable()
 
 
 func _on_js_purchase_catch(args):
-	if _purchase_callback != null:
-		_purchase_callback.call_func(false)
-		_purchase_callback = null
+	if not _purchase_callback.is_null():
+		_purchase_callback.call(false)
+		_purchase_callback = Callable()
 
 
 func _on_js_consume_purchase_then(args):
-	if _consume_purchase_callback != null:
-		_consume_purchase_callback.call_func(true)
-		_consume_purchase_callback = null
+	if not _consume_purchase_callback.is_null():
+		_consume_purchase_callback.call(true)
+		_consume_purchase_callback = Callable()
 
 
 func _on_js_consume_purchase_catch(args):
-	if _consume_purchase_callback != null:
-		_consume_purchase_callback.call_func(false)
-		_consume_purchase_callback = null
+	if not _consume_purchase_callback.is_null():
+		_consume_purchase_callback.call(false)
+		_consume_purchase_callback = Callable()
 
 
 func _on_js_get_catalog_then(args):
-	if _get_catalog_callback != null:
+	if not _get_catalog_callback.is_null():
 		var data = args[0]
 		var data_type = typeof(data)
 		match data_type:
@@ -118,12 +118,13 @@ func _on_js_get_catalog_then(args):
 					}
 					
 					array.append(catalog_item)
-				_get_catalog_callback.call_func(true, array)
+				_get_catalog_callback.call(true, array)
 			_:
-				_get_catalog_callback.call_func(false, [])
-		_get_catalog_callback = null
+				_get_catalog_callback.call(false, [])
+		_get_catalog_callback = Callable()
 
 
+# TODO: Refactor with static typing to remove call_func()
 func _on_js_get_catalog_catch(args):
 	if _js_get_catalog_catch != null:
 		_js_get_catalog_catch.call_func(false, [])
@@ -131,7 +132,7 @@ func _on_js_get_catalog_catch(args):
 
 
 func _on_js_get_purchases_then(args):
-	if _get_purchases_callback != null:
+	if not _get_purchases_callback.is_null():
 		var data = args[0]
 		var data_type = typeof(data)
 		match data_type:
@@ -145,12 +146,13 @@ func _on_js_get_purchases_then(args):
 					}
 					
 					array.append(purchase_data)
-				_get_purchases_callback.call_func(true, array)
+				_get_purchases_callback.call(true, array)
 			_:
-				_get_purchases_callback.call_func(false, [])
-		_get_purchases_callback = null
+				_get_purchases_callback.call(false, [])
+		_get_purchases_callback = Callable()
 
 
+# TODO: Refactor with static typing to remove call_func()
 func _on_js_get_purchases_catch(args):
 	if _js_get_catalog_catch != null:
 		_js_get_catalog_catch.call_func(false, [])

@@ -23,12 +23,12 @@ func is_available(storage_type):
 			return false
 
 
-func get(key, callback = null, storage_type = null):
-	if callback == null:
+func get(key, callback: Callable = Callable(), storage_type = null):
+	if callback.is_null():
 		return
 	
 	if storage_type != null and not is_supported(storage_type):
-		callback.call_func(false, null)
+		callback.call(false, null)
 		return
 	
 	var key_type = typeof(key)
@@ -49,12 +49,13 @@ func get(key, callback = null, storage_type = null):
 		_:
 			success = false
 	
-	callback.call_func(success, data)
+	callback.call(success, data)
 
 
-func set(key, value, callback = null, storage_type = null):
+func set(key, value, callback: Callable = Callable(), storage_type = null):
+	# TODO: Check of callback.is_null() skipped?
 	if storage_type != null and not is_supported(storage_type):
-		callback.call_func(false)
+		callback.call(false)
 		return
 	
 	var key_type = typeof(key)
@@ -71,13 +72,13 @@ func set(key, value, callback = null, storage_type = null):
 		_:
 			success = false
 	
-	if callback != null:
-		callback.call_func(success)
+	if not callback.is_null():
+		callback.call(success)
 
 
-func delete(key, callback = null, storage_type = null):
+func delete(key, callback: Callable = Callable(), storage_type = null):
 	if storage_type != null and not is_supported(storage_type):
-		callback.call_func(false)
+		callback.call(false)
 		return
 	
 	var key_type = typeof(key)
@@ -94,8 +95,8 @@ func delete(key, callback = null, storage_type = null):
 		_:
 			success = false
 	
-	if callback != null:
-		callback.call_func(success)
+	if not callback.is_null():
+		callback.call(success)
 
 
 func _get_file_path(key):

@@ -40,36 +40,36 @@ func _is_rate_supported_getter():
 	return false
 
 
-func share(options, callback = null):
-	if callback != null:
-		callback.call_func(false)
+func share(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func join_community(options, callback = null):
-	if callback != null:
-		callback.call_func(false)
+func join_community(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func invite_friends(callback = null):
-	if callback != null:
-		callback.call_func(false)
+func invite_friends(callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func create_post(options, callback = null):
-	if callback != null:
-		callback.call_func(false)
+func create_post(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func add_to_favorites(callback = null):
-	if callback != null:
-		callback.call_func(false)
+func add_to_favorites(callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func add_to_home_screen(callback = null):
-	if callback != null:
-		callback.call_func(false)
+func add_to_home_screen(callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func rate(callback = null):
-	if callback != null:
-		callback.call_func(false)
+func rate(callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)

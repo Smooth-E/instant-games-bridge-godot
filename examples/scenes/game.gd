@@ -9,7 +9,7 @@ var last_visibility_states = []
 func _ready():
 	current_visibility_state_label.text = "Current Visibility State: " + Bridge.game.visibility_state
 	_on_visibility_state_changed(Bridge.game.visibility_state)
-	Bridge.game.connect("visibility_state_changed", self, "_on_visibility_state_changed")
+	Bridge.game.visibility_state_changed.connect(_on_visibility_state_changed)
 
 
 func _on_visibility_state_changed(state):

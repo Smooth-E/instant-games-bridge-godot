@@ -30,21 +30,21 @@ func _is_get_entries_supported_getter():
 	return false
 
 
-func set_score(options, callback = null):
-	if callback != null:
-		callback.call_func(false)
+func set_score(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)
 
 
-func get_score(options, callback = null):
-	if callback != null:
-		callback.call_func(false, 0)
+func get_score(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false, 0)
 
 
-func get_entries(options, callback = null):
-	if callback != null:
-		callback.call_func(false, [])
+func get_entries(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false, [])
 
 
-func show_native_popup(options, callback = null):
-	if callback != null:
-		callback.call_func(false)
+func show_native_popup(options, callback: Callable = Callable()):
+	if not callback.is_null():
+		callback.call(false)

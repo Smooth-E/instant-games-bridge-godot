@@ -31,27 +31,27 @@ func _is_get_entries_supported_getter():
 
 
 var _js_leaderboard = null
-var _set_score_callback = null
+var _set_score_callback: Callable = Callable()
 var _js_set_score_then = JavaScriptBridge.create_callback(_on_js_set_score_then)
 var _js_set_score_catch = JavaScriptBridge.create_callback(_on_js_set_score_catch)
-var _get_score_callback = null
+var _get_score_callback: Callable = Callable()
 var _js_get_score_then = JavaScriptBridge.create_callback(_on_js_get_score_then)
 var _js_get_score_catch = JavaScriptBridge.create_callback(_on_js_get_score_catch)
-var _get_entries_callback = null
+var _get_entries_callback: Callable = Callable()
 var _js_get_entries_then = JavaScriptBridge.create_callback(_on_js_get_entries_then)
 var _js_get_entries_catch = JavaScriptBridge.create_callback(_on_js_get_entries_catch)
-var _show_native_popup_callback = null
+var _show_native_popup_callback: Callable = Callable()
 var _js_show_native_popup_then = JavaScriptBridge.create_callback(_on_js_show_native_popup_then)
 var _js_show_native_popup_catch = JavaScriptBridge.create_callback(_on_js_show_native_popup_catch)
 
 
-func set_score(options, callback = null):
-	if _set_score_callback != null:
+func set_score(options, callback: Callable = Callable()):
+	if not _set_score_callback.is_null():
 		return
 	
 	if not options is Bridge.SetScoreYandexOptions:
-		if callback != null:
-			callback.call_func(false)
+		if not callback.is_null():
+			callback.call(false)
 		return
 	
 	_set_score_callback = callback
@@ -66,13 +66,13 @@ func set_score(options, callback = null):
 		.catch(_js_set_score_catch)
 
 
-func get_score(options, callback = null):
-	if _get_score_callback != null:
+func get_score(options, callback: Callable = Callable()):
+	if not _get_score_callback.is_null():
 		return
 	
 	if not options is Bridge.GetScoreYandexOptions:
-		if callback != null:
-			callback.call_func(false)
+		if not callback.is_null():
+			callback.call(false)
 		return
 	
 	_get_score_callback = callback
@@ -86,13 +86,13 @@ func get_score(options, callback = null):
 		.catch(_js_get_score_catch)
 
 
-func get_entries(options, callback = null):
-	if _get_entries_callback != null:
+func get_entries(options, callback: Callable = Callable()):
+	if not _get_entries_callback.is_null():
 		return
 	
 	if not options is Bridge.GetEntriesYandexOptions:
-		if callback != null:
-			callback.call_func(false)
+		if not callback.is_null():
+			callback.call(false)
 		return
 	
 	_get_entries_callback = callback
@@ -109,13 +109,13 @@ func get_entries(options, callback = null):
 		.catch(_js_get_entries_catch)
 
 
-func show_native_popup(options, callback = null):
-	if _show_native_popup_callback != null:
+func show_native_popup(options, callback: Callable = Callable()):
+	if not _show_native_popup_callback.is_null():
 		return
 	
 	if not options is Bridge.ShowNativePopupVkOptions:
-		if callback != null:
-			callback.call_func(false)
+		if not callback.is_null():
+			callback.call(false)
 		return
 	
 	_show_native_popup_callback = callback
@@ -135,31 +135,31 @@ func _init(js_leaderboard):
 
 
 func _on_js_set_score_then(args):
-	if _set_score_callback != null:
-		_set_score_callback.call_func(true)
-		_set_score_callback = null
+	if not _set_score_callback.is_null():
+		_set_score_callback.call(true)
+		_set_score_callback = Callable()
 
 
 func _on_js_set_score_catch(args):
-	if _set_score_callback != null:
-		_set_score_callback.call_func(false)
-		_set_score_callback = null
+	if not _set_score_callback.is_null():
+		_set_score_callback.call(false)
+		_set_score_callback = Callable()
 
 
 func _on_js_get_score_then(args):
-	if _get_score_callback != null:
-		_get_score_callback.call_func(true, args[0])
-		_get_score_callback = null
+	if not _get_score_callback.is_null():
+		_get_score_callback.call(true, args[0])
+		_get_score_callback = Callable()
 
 
 func _on_js_get_score_catch(args):
-	if _get_score_callback != null:
-		_get_score_callback.call_func(false, 0)
-		_get_score_callback = null
+	if not _get_score_callback.is_null():
+		_get_score_callback.call(false, 0)
+		_get_score_callback = Callable()
 
 
 func _on_js_get_entries_then(args):
-	if _get_entries_callback != null:
+	if not _get_entries_callback.is_null():
 		var data = args[0]
 		var data_type = typeof(data)
 		match data_type:
@@ -179,25 +179,25 @@ func _on_js_get_entries_then(args):
 						entry.photos.append(js_entry.photos[j])
 					
 					array.append(entry)
-				_get_entries_callback.call_func(true, array)
+				_get_entries_callback.call(true, array)
 			_:
-				_get_entries_callback.call_func(false, [])
-		_get_entries_callback = null
+				_get_entries_callback.call(false, [])
+		_get_entries_callback = Callable()
 
 
 func _on_js_get_entries_catch(args):
-	if _get_entries_callback != null:
-		_get_entries_callback.call_func(false, [])
-		_get_entries_callback = null
+	if not _get_entries_callback.is_null():
+		_get_entries_callback.call(false, [])
+		_get_entries_callback = Callable()
 
 
 func _on_js_show_native_popup_then(args):
-	if _show_native_popup_callback != null:
-		_show_native_popup_callback.call_func(true)
-		_show_native_popup_callback = null
+	if not _show_native_popup_callback.is_null():
+		_show_native_popup_callback.call(true)
+		_show_native_popup_callback = Callable()
 
 
 func _on_js_show_native_popup_catch(args):
-	if _show_native_popup_callback != null:
-		_show_native_popup_callback.call_func(false)
-		_show_native_popup_callback = null
+	if not _show_native_popup_callback.is_null():
+		_show_native_popup_callback.call(false)
+		_show_native_popup_callback = Callable()
