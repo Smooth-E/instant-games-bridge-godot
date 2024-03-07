@@ -1,12 +1,12 @@
 extends DetailedSceneBase
 
 
-onready var is_authorization_supported_label = $MarginContainer2/VBoxContainer/IsAuthSupported
-onready var is_authorized_label = $MarginContainer2/VBoxContainer/IsAuthorized
-onready var player_id_label = $MarginContainer2/VBoxContainer/PlayerID
-onready var player_name_label = $MarginContainer2/VBoxContainer/PlayerName
-onready var player_photo_rect = $MarginContainer2/VBoxContainer/PlayerPhoto
-onready var authorization_state_label = $MarginContainer2/VBoxContainer/HBoxContainer2/AuthorizationState
+@onready var is_authorization_supported_label = $MarginContainer2/VBoxContainer/IsAuthSupported
+@onready var is_authorized_label = $MarginContainer2/VBoxContainer/IsAuthorized
+@onready var player_id_label = $MarginContainer2/VBoxContainer/PlayerID
+@onready var player_name_label = $MarginContainer2/VBoxContainer/PlayerName
+@onready var player_photo_rect = $MarginContainer2/VBoxContainer/PlayerPhoto
+@onready var authorization_state_label = $MarginContainer2/VBoxContainer/HBoxContainer2/AuthorizationState
 
 
 func _ready():
@@ -16,7 +16,7 @@ func _ready():
 
 func _on_authorize_button_pressed():
 	authorization_state_label.text = "Loading.."
-	Bridge.player.authorize(funcref(self, "_on_player_authorize_completed"))
+	Bridge.player.authorize(_on_player_authorize_completed)
 
 func _on_player_authorize_completed(success):
 	authorization_state_label.text = "Authorization completed, success: " + str(success)
@@ -37,10 +37,11 @@ func _update_player_info():
 func _load_player_photo(url):
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
-	http_request.connect("request_completed", self, "_on_load_player_photo_completed")
+	http_request.connect("request_completed", _on_load_player_photo_completed)
 	var error = http_request.request(url)
 	if error != OK:
 		push_error("An error occurred in the HTTP request")
+
 
 func _on_load_player_photo_completed(result, response_code, headers, body):
 	var image = Image.new()

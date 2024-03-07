@@ -1,8 +1,8 @@
 extends DetailedSceneBase
 
 
-onready var current_visibility_state_label = $MarginContainer2/VBoxContainer/CurrentVisibilityState
-onready var last_visibility_states_label = $MarginContainer2/VBoxContainer/LastVisibilityStates
+@onready var current_visibility_state_label = $MarginContainer2/VBoxContainer/CurrentVisibilityState
+@onready var last_visibility_states_label = $MarginContainer2/VBoxContainer/LastVisibilityStates
 var last_visibility_states = []
 
 
@@ -11,6 +11,7 @@ func _ready():
 	_on_visibility_state_changed(Bridge.game.visibility_state)
 	Bridge.game.connect("visibility_state_changed", self, "_on_visibility_state_changed")
 
+
 func _on_visibility_state_changed(state):
 	last_visibility_states.append(state)
 	
@@ -18,6 +19,7 @@ func _on_visibility_state_changed(state):
 		last_visibility_states.remove(0)
 	
 	_update_last_states()
+
 
 func _update_last_states():
 	var text = "Last Visibility States: "

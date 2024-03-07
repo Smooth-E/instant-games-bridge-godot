@@ -1,10 +1,10 @@
 extends DetailedSceneBase
 
-onready var is_banner_supported_label = $MarginContainer2/VBoxContainer/IsBannerSupported
-onready var banner_state_label = $MarginContainer2/VBoxContainer/BannerState
-onready var minimum_delay_label = $MarginContainer2/VBoxContainer/MinimumDelay
-onready var interstitial_state_label = $MarginContainer2/VBoxContainer/InterstitialState
-onready var rewarded_state_label = $MarginContainer2/VBoxContainer/RewardedState
+@onready var is_banner_supported_label = $MarginContainer2/VBoxContainer/IsBannerSupported
+@onready var banner_state_label = $MarginContainer2/VBoxContainer/BannerState
+@onready var minimum_delay_label = $MarginContainer2/VBoxContainer/MinimumDelay
+@onready var interstitial_state_label = $MarginContainer2/VBoxContainer/InterstitialState
+@onready var rewarded_state_label = $MarginContainer2/VBoxContainer/RewardedState
 
 var last_banner_states = []
 var last_interstitial_states = []
@@ -27,14 +27,18 @@ func _ready():
 func _on_show_banner_button_pressed():
 	Bridge.advertisement.show_banner(Bridge.ShowBannerOptions.new("banner-container"))
 
+
 func _on_hide_banner_button_pressed():
 	Bridge.advertisement.hide_banner()
+
 
 func _on_show_interstitial_button_pressed():
 	Bridge.advertisement.show_interstitial()
 
+
 func _on_show_interstitial_ignore_delay_button_pressed():
 	Bridge.advertisement.show_interstitial(true)
+
 
 func _on_show_rewarded_button_pressed():
 	Bridge.advertisement.show_rewarded()
@@ -51,6 +55,7 @@ func _on_banner_state_changed(state):
 	
 	_update_banner_states()
 
+
 func _on_interstitial_state_changed(state):
 	if state == null:
 		return
@@ -61,6 +66,7 @@ func _on_interstitial_state_changed(state):
 		last_interstitial_states.remove(0)
 	
 	_update_interstitial_states()
+
 
 func _on_rewarded_state_changed(state):
 	if state == null:
@@ -82,6 +88,7 @@ func _update_banner_states():
 	
 	banner_state_label.text = text
 
+
 func _update_interstitial_states():
 	var text = "Last Interstitial States: "
 	
@@ -89,6 +96,7 @@ func _update_interstitial_states():
 		text += state + " -> "
 	
 	interstitial_state_label.text = text
+
 
 func _update_rewarded_states():
 	var text = "Last Rewarded States: "
