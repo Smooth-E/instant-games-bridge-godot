@@ -1,4 +1,4 @@
-var type setget , _type_getter
+var type : get = _type_getter
 
 var _js_device = null
 

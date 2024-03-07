@@ -1,4 +1,4 @@
-var is_supported setget , _is_supported_getter
+var is_supported : get = _is_supported_getter
 
 
 func _is_supported_getter():
@@ -7,17 +7,17 @@ func _is_supported_getter():
 
 var _js_payments = null
 var _purchase_callback = null
-var _js_purchase_then = JavaScript.create_callback(self, "_on_js_purchase_then")
-var _js_purchase_catch = JavaScript.create_callback(self, "_on_js_purchase_catch")
+var _js_purchase_then = JavaScriptBridge.create_callback(_on_js_purchase_then)
+var _js_purchase_catch = JavaScriptBridge.create_callback(_on_js_purchase_catch)
 var _consume_purchase_callback = null
-var _js_consume_purchase_then = JavaScript.create_callback(self, "_on_js_consume_purchase_then")
-var _js_consume_purchase_catch = JavaScript.create_callback(self, "_on_js_consume_purchase_catch")
+var _js_consume_purchase_then = JavaScriptBridge.create_callback(_on_js_consume_purchase_then)
+var _js_consume_purchase_catch = JavaScriptBridge.create_callback(_on_js_consume_purchase_catch)
 var _get_catalog_callback = null
-var _js_get_catalog_then = JavaScript.create_callback(self, "_on_js_get_catalog_then")
-var _js_get_catalog_catch = JavaScript.create_callback(self, "_on_js_get_catalog_catch")
+var _js_get_catalog_then = JavaScriptBridge.create_callback(_on_js_get_catalog_then)
+var _js_get_catalog_catch = JavaScriptBridge.create_callback(_on_js_get_catalog_catch)
 var _get_purchases_callback = null
-var _js_get_purchases_then = JavaScript.create_callback(self, "_on_js_get_purchases_then")
-var _js_get_purchases_catch = JavaScript.create_callback(self, "_on_js_get_purchases_catch")
+var _js_get_purchases_then = JavaScriptBridge.create_callback(_on_js_get_purchases_then)
+var _js_get_purchases_catch = JavaScriptBridge.create_callback(_on_js_get_purchases_catch)
 
 
 func purchase(purchase_id, callback = null):
@@ -26,7 +26,7 @@ func purchase(purchase_id, callback = null):
 	
 	_purchase_callback = callback
 	
-	var js_options = JavaScript.create_object("Object")
+	var js_options = JavaScriptBridge.create_object("Object")
 	js_options.yandex = purchase_id
 	
 	_js_payments.purchase(js_options) \
@@ -39,7 +39,7 @@ func consume_purchase(purchase_token, callback = null):
 
 	_consume_purchase_callback = callback
 	
-	var js_options = JavaScript.create_object("Object")
+	var js_options = JavaScriptBridge.create_object("Object")
 	js_options.yandex = purchase_token
 	
 	_js_payments.consumePurchase(js_options) \

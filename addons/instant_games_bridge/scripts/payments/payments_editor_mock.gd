@@ -1,4 +1,4 @@
-var is_supported setget , _is_supported_getter
+var is_supported : get = _is_supported_getter
 
 
 func _is_supported_getter():

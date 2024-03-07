@@ -1,4 +1,4 @@
-var default_type setget , _default_type_getter
+var default_type : get =_default_type_getter
 
 const _FILE_EXTENSION = ".save"
 
@@ -98,13 +98,11 @@ func _get_file_path(key):
 
 func _get(key):
 	var path = _get_file_path(key)
-	var dir = Directory.new()
 	
-	if not dir.file_exists(path):
+	if not FileAccess.file_exists(path):
 		return null
 	
-	var file = File.new()
-	file.open(path, File.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	
 	var data = file.get_as_text()
 	file = null
@@ -117,8 +115,7 @@ func _get(key):
 func _set(key, value):
 	var path = _get_file_path(key)
 	
-	var file = File.new()
-	file.open(path, File.WRITE)
+	var file = FileAccess.open(path, FileAccess.WRITE)
 	
 	if (typeof(value) != TYPE_STRING):
 		value = str(value)
@@ -128,9 +125,8 @@ func _set(key, value):
 
 func _delete(key):
 	var path = _get_file_path(key)
-	var dir = Directory.new()
 	
-	if not dir.file_exists(path):
+	if not FileAccess.file_exists(path):
 		return
 	
-	dir.remove(path)
+	DirAccess.remove_absolute(path)

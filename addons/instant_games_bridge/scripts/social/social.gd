@@ -1,11 +1,11 @@
-var is_share_supported setget , _is_share_supported_getter
-var is_join_community_supported setget , _is_join_community_supported_getter
-var is_invite_friends_supported setget , _is_invite_friends_supported_getter
-var is_create_post_supported setget , _is_create_post_supported_getter
-var is_add_to_favorites_supported setget , _is_add_to_favorites_supported_getter
-var is_add_to_home_screen_supported setget , _is_add_to_home_screen_supported_getter
-var is_external_links_allowed setget , _is_external_links_allowed_getter
-var is_rate_supported setget , _is_rate_supported_getter
+var is_share_supported : get = _is_share_supported_getter
+var is_join_community_supported : get = _is_join_community_supported_getter
+var is_invite_friends_supported : get = _is_invite_friends_supported_getter
+var is_create_post_supported : get = _is_create_post_supported_getter
+var is_add_to_favorites_supported : get = _is_add_to_favorites_supported_getter
+var is_add_to_home_screen_supported : get = _is_add_to_home_screen_supported_getter
+var is_external_links_allowed : get = _is_external_links_allowed_getter
+var is_rate_supported : get = _is_rate_supported_getter
 
 
 func _is_share_supported_getter():
@@ -34,26 +34,26 @@ func _is_rate_supported_getter():
 	
 var _js_social = null
 var _share_callback = null
-var _js_share_then = JavaScript.create_callback(self, "_on_js_share_then")
-var _js_share_catch = JavaScript.create_callback(self, "_on_js_share_catch")
+var _js_share_then = JavaScriptBridge.create_callback(_on_js_share_then)
+var _js_share_catch = JavaScriptBridge.create_callback(_on_js_share_catch)
 var _join_community_callback = null
-var _js_join_community_then = JavaScript.create_callback(self, "_on_js_join_community_then")
-var _js_join_community_catch = JavaScript.create_callback(self, "_on_js_join_community_catch")
+var _js_join_community_then = JavaScriptBridge.create_callback(_on_js_join_community_then)
+var _js_join_community_catch = JavaScriptBridge.create_callback(_on_js_join_community_catch)
 var _invite_friends_callback = null
-var _js_invite_friends_then = JavaScript.create_callback(self, "_on_js_invite_friends_then")
-var _js_invite_friends_catch = JavaScript.create_callback(self, "_on_js_invite_friends_catch")
+var _js_invite_friends_then = JavaScriptBridge.create_callback(_on_js_invite_friends_then)
+var _js_invite_friends_catch = JavaScriptBridge.create_callback(_on_js_invite_friends_catch)
 var _create_post_callback = null
-var _js_create_post_then = JavaScript.create_callback(self, "_on_js_create_post_then")
-var _js_create_post_catch = JavaScript.create_callback(self, "_on_js_create_post_catch")
+var _js_create_post_then = JavaScriptBridge.create_callback(_on_js_create_post_then)
+var _js_create_post_catch = JavaScriptBridge.create_callback(_on_js_create_post_catch)
 var _add_to_favorites_callback = null
-var _js_add_to_favorites_then = JavaScript.create_callback(self, "_on_js_add_to_favorites_then")
-var _js_add_to_favorites_catch = JavaScript.create_callback(self, "_on_js_add_to_favorites_catch")
+var _js_add_to_favorites_then = JavaScriptBridge.create_callback(_on_js_add_to_favorites_then)
+var _js_add_to_favorites_catch = JavaScriptBridge.create_callback(_on_js_add_to_favorites_catch)
 var _add_to_home_screen_callback = null
-var _js_add_to_home_screen_then = JavaScript.create_callback(self, "_on_js_add_to_home_screen_then")
-var _js_add_to_home_screen_catch = JavaScript.create_callback(self, "_on_js_add_to_home_screen_catch")
+var _js_add_to_home_screen_then = JavaScriptBridge.create_callback(_on_js_add_to_home_screen_then)
+var _js_add_to_home_screen_catch = JavaScriptBridge.create_callback(_on_js_add_to_home_screen_catch)
 var _rate_callback = null
-var _js_rate_then = JavaScript.create_callback(self, "_on_js_rate_then")
-var _js_rate_catch = JavaScript.create_callback(self, "_on_js_rate_catch")
+var _js_rate_then = JavaScriptBridge.create_callback(_on_js_rate_then)
+var _js_rate_catch = JavaScriptBridge.create_callback(_on_js_rate_catch)
 
 
 func share(options, callback = null):
@@ -67,8 +67,8 @@ func share(options, callback = null):
 	
 	_share_callback = callback
 	
-	var js_options = JavaScript.create_object("Object")
-	js_options.vk = JavaScript.create_object("Object")
+	var js_options = JavaScriptBridge.create_object("Object")
+	js_options.vk = JavaScriptBridge.create_object("Object")
 	js_options.vk.link = options.link
 	
 	_js_social.share(js_options) \
@@ -86,8 +86,8 @@ func join_community(options, callback = null):
 	
 	_join_community_callback = callback
 	
-	var js_options = JavaScript.create_object("Object")
-	js_options.vk = JavaScript.create_object("Object")
+	var js_options = JavaScriptBridge.create_object("Object")
+	js_options.vk = JavaScriptBridge.create_object("Object")
 	js_options.vk.groupId = options.group_id
 	
 	_js_social.joinCommunity(js_options) \
@@ -114,8 +114,8 @@ func create_post(options, callback = null):
 	
 	_create_post_callback = callback
 	
-	var js_options = JavaScript.create_object("Object")
-	js_options.vk = JavaScript.create_object("Object")
+	var js_options = JavaScriptBridge.create_object("Object")
+	js_options.vk = JavaScriptBridge.create_object("Object")
 	js_options.vk.message = options.message
 	js_options.vk.attachments = options.attachments
 	

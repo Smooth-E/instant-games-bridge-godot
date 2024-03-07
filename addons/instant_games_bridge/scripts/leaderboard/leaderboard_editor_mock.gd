@@ -1,9 +1,9 @@
-var is_supported setget , _is_supported_getter
-var is_native_popup_supported setget , _is_native_popup_supported_getter
-var is_multiple_boards_supported setget , _is_multiple_boards_supported_getter
-var is_set_score_supported setget , _is_set_score_supported_getter
-var is_get_score_supported setget , _is_get_score_supported_getter
-var is_get_entries_supported setget , _is_get_entries_supported_getter
+var is_supported : get = _is_supported_getter
+var is_native_popup_supported : get = _is_native_popup_supported_getter
+var is_multiple_boards_supported : get = _is_multiple_boards_supported_getter
+var is_set_score_supported : get = _is_set_score_supported_getter
+var is_get_score_supported : get = _is_get_score_supported_getter
+var is_get_entries_supported : get = _is_get_entries_supported_getter
 
 
 func _is_supported_getter():

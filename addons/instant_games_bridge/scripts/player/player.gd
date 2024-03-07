@@ -1,8 +1,8 @@
-var is_authorization_supported setget , _is_authorization_supported_getter
-var is_authorized setget , _is_authorized_getter
-var id setget , _id_getter
-var name setget , _name_getter
-var photos setget , _photos_getter
+var is_authorization_supported : get = _is_authorization_supported_getter
+var is_authorized : get = _is_authorized_getter
+var id : get = _id_getter
+var name : get = _name_getter
+var photos : get = _photos_getter
 
 
 func _is_authorization_supported_getter():
@@ -24,8 +24,8 @@ func _photos_getter():
 	return array
 
 var _js_player = null
-var _js_authorize_then = JavaScript.create_callback(self, "_on_js_authorize_then")
-var _js_authorize_catch = JavaScript.create_callback(self, "_on_js_authorize_catch")
+var _js_authorize_then = JavaScriptBridge.create_callback(_on_js_authorize_then)
+var _js_authorize_catch = JavaScriptBridge.create_callback(_on_js_authorize_catch)
 var _authorize_callback = null
 
 
