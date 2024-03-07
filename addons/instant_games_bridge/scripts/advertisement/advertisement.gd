@@ -48,7 +48,7 @@ func hide_banner():
 	_js_advertisement.hideBanner()
 
 
-func show_interstitial(ignore_delay = false):
+func show_interstitial(ignore_delay: bool = false):
 	_js_advertisement.showInterstitial(ignore_delay)
 
 

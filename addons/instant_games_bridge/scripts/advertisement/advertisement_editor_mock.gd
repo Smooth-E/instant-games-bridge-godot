@@ -54,7 +54,7 @@ func hide_banner():
 	_set_banner_state(Bridge.BannerState.HIDDEN)
 
 
-func show_interstitial(ignore_delay = false):
+func show_interstitial(ignore_delay: bool = false):
 	_set_interstitial_state(Bridge.InterstitialState.LOADING)
 	_set_interstitial_state(Bridge.InterstitialState.OPENED)
 	_set_interstitial_state(Bridge.InterstitialState.CLOSED)
