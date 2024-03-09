@@ -21,4 +21,4 @@ func _tld_getter():
 
 
 func send_message(message):
-	pass
+	print("Send message: \"", message, "\"")

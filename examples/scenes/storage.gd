@@ -40,7 +40,7 @@ func _on_load_data_button_pressed():
 func _on_save_data_button_pressed():
 	Bridge.storage.set(
 		["coins_count", "level_id", "is_tutorial_completed"], 
-		[coins_input.text, level_id_input.text, is_tutorial_completed_checkbox.pressed], 
+		[coins_input.text, level_id_input.text, is_tutorial_completed_checkbox.button_pressed], 
 		_on_storage_set_completed
 	)
 
@@ -66,7 +66,9 @@ func _on_storage_get_completed(success, data):
 			print("Level ID is null")
 		
 		if data[2] != null:
-			is_tutorial_completed_checkbox.set_pressed_no_signal(data[2])
+			# Boolean values are saved as strings 'true' or 'false' in the file 
+			# since we use file.store_string(...) in storage_editor_mock.gd
+			is_tutorial_completed_checkbox.set_pressed_no_signal(data[2] == 'true')
 		else:
 			is_tutorial_completed_checkbox.set_pressed_no_signal(false)
 			print("Is Tutorial Completed is null")
@@ -77,6 +79,7 @@ func _on_storage_set_completed(success):
 	level_id_input.text = ""
 	is_tutorial_completed_checkbox.set_pressed_no_signal(false)
 	print("On Storage Set Completed, success: ", success)
+
 
 func _on_storage_delete_completed(success):
 	coins_input.text = ""

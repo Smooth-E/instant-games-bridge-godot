@@ -99,22 +99,21 @@ func delete(key, callback: Callable = Callable(), storage_type = null):
 		callback.call(success)
 
 
-func _get_file_path(key):
+func _get_file_path(key: String) -> String:
 	return "user://" + key + _FILE_EXTENSION
 
 
-func _get(key):
-	var path = _get_file_path(key)
+func _get(key: StringName):
+	var path: String = _get_file_path(key)
 	
 	if not FileAccess.file_exists(path):
 		return null
 	
-	var file = FileAccess.open(path, FileAccess.READ)
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	var data: String = file.get_as_text()
+	file.close()
 	
-	var data = file.get_as_text()
-	file = null
-	
-	if data.empty():
+	if data.is_empty():
 		return null
 	else:
 		return data
