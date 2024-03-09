@@ -190,7 +190,7 @@ var _remote_config = null
 
 
 func _ready():
-	if OS.has_feature("JavaScript"):
+	if OS.has_feature("web"):
 		var js_bridge = JavaScriptBridge.get_interface("bridge")
 		_platform = load("res://addons/instant_games_bridge/scripts/platform/platform.gd").new(js_bridge.platform)
 		_device = load("res://addons/instant_games_bridge/scripts/device/device.gd").new(js_bridge.device)
