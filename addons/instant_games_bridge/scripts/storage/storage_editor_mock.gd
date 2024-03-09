@@ -103,7 +103,7 @@ func _get_file_path(key: String) -> String:
 	return "user://" + key + _FILE_EXTENSION
 
 
-func _get(key: StringName):
+func _get(key):
 	var path: String = _get_file_path(key)
 	
 	if not FileAccess.file_exists(path):
@@ -124,11 +124,19 @@ func _set(key, value):
 	
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	
+	# Convert boolean value to a 1/0 number to then easily usse bool(data[...])
+	# The problem is that a boolean is stored as 'true' / 'false' thus returning a String, 
+	# which cannot be used with bool(...). Actual JavaScript implementation of storage
+	# on the other hand returns read boolean vlaues as boolen-type objects.
+
+	if (typeof(value) == TYPE_BOOL):
+		value = 1 if value else 0
+	
 	if (typeof(value) != TYPE_STRING):
 		value = str(value)
 	
 	file.store_string(value)
-	file = null
+	file.close()
 
 
 func _delete(key):

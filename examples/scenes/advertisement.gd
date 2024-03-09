@@ -45,7 +45,7 @@ func _on_show_rewarded_button_pressed() -> void:
 	Bridge.advertisement.show_rewarded()
 
 
-# TODO: Find a way to constrint arguments to Bridge.BannerState
+# TODO: Find a way to constraint arguments to Bridge.BannerState
 func _on_banner_state_changed(state: String) -> void:
 	if state == null:
 		return

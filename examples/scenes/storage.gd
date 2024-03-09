@@ -66,9 +66,7 @@ func _on_storage_get_completed(success, data):
 			print("Level ID is null")
 		
 		if data[2] != null:
-			# Boolean values are saved as strings 'true' or 'false' in the file 
-			# since we use file.store_string(...) in storage_editor_mock.gd
-			is_tutorial_completed_checkbox.set_pressed_no_signal(data[2] == 'true')
+			is_tutorial_completed_checkbox.set_pressed_no_signal(bool(data[2]))
 		else:
 			is_tutorial_completed_checkbox.set_pressed_no_signal(false)
 			print("Is Tutorial Completed is null")
